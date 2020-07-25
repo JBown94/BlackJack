@@ -1,8 +1,8 @@
 import React from 'react';
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
 
-// {/* <img src={logo} className="App-logo" alt="logo" /> */}
+import Board from './Board';
 
 function App() {
   return (
@@ -15,18 +15,3 @@ function App() {
 }
 
 export default App;
-
-//-------------------------------------------------------------------
-//TOOD: Create a separate file for this class
-
-class Board extends React.Component {
-  constructor(props) {
-      super(props);
-  }
-
-  render() {
-      return (
-        <h1>The Board Data</h1>
-      );
-  }
-}
