@@ -1,0 +1,23 @@
+.player-container {
+	display: inline-block;
+    border: solid 1px #bfbfbf;
+    background: #efefef;
+    margin: 1px 5px;
+	height: 125px;
+	width: 250px;
+}
+
+    .player-container .player-name {
+        color: #3c3c3c;
+        margin: 3px;
+    }
+
+    .player-container .card-container {
+        display: inline-block;
+        border: solid 1px green;
+        background: #5aa75a;
+        opacity: 0.75;
+        margin: 15px;
+        height: 95px;
+        width: 220px;
+    }

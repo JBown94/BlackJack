@@ -1,13 +1,11 @@
 import React from 'react';
-// import logo from './logo.svg';
-import './App.css';
-
 import Board from './Board';
+import './App.css';
 
 function App() {
   return (
     <div>
-      <h1>Black Jack Board</h1>
+      <h1>Black Jack</h1>
       <hr />
       <Board />
     </div>
