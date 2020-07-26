@@ -19,6 +19,10 @@ class Board extends React.Component {
               {this.renderPlayerArea(2)}
               {this.renderPlayerArea(3)}
               {this.renderPlayerArea(4)}
+              <div className="main-deck-area">
+                <div className="card-pile">Deck Pile</div>
+                <div className="card-pile">Playing Pile</div>
+              </div>
           </div>
         );
     }

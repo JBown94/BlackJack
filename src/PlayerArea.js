@@ -18,10 +18,12 @@ class PlayerArea extends React.Component {
     render() {
         return (
             <div id={this.state.id} className="player-container">
-                <span className="player-name">{this.state.playerName}</span>
-                <div className="card-container">
-                    <p>Cards List</p>
-                    <ul></ul>
+                <div className="player-name">{this.state.playerName}</div>
+                <div className="cards-container">
+                    <ul>Cards List</ul>
+                </div>
+                <div className="player-actions">
+                    Player Actions
                 </div>
             </div>
         );
