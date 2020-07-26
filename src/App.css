@@ -3,24 +3,3 @@ html, body, #root {
   margin: 0;
   overflow: hidden;
 }
-
-
-/* START - Temporary layout styles */
-.player-container {
-  border: solid 1px red;
-  background: #E4ACAC;
-  margin: 10px;
-}
-
-.player-container .player-name, 
-  .player-container .cards-container, 
-  .player-container .player-actions {
-      border: dotted 1px blue;
-  } 
-
-.main-deck-area, .main-deck-area .card-pile {
-  border: solid 1px purple;
-  background: #DAA3DA;
-  margin: 10px;
-}
-/* END - Temporary layout styles */

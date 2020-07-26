@@ -8,10 +8,16 @@ class PlayerArea extends React.Component {
         const defaultName = "Player" + props.playerNo;
         const customName = null;
 
+        const textResource = {
+            PLAY: "Play",
+            PASS: "Pass",
+        };
+
         this.state = {
             id: "player-area-" + props.playerNo,
             playerName: customName || defaultName,
-            playerActive: false
+            playerActive: false,
+            text: textResource
         };
     }
 
@@ -23,7 +29,8 @@ class PlayerArea extends React.Component {
                     <ul>Cards List</ul>
                 </div>
                 <div className="player-actions">
-                    Player Actions
+                    <button>{this.state.text['PLAY']}</button>
+                    <button>{this.state.text['PASS']}</button>
                 </div>
             </div>
         );
