@@ -7,26 +7,26 @@ class PlayerArea extends React.Component {
         super(props);
 
         const defaultName = "Player" + props.playerNo;
-        const customName = null;
 
         this.state = {
             id: "player-area-" + props.playerNo,
-            playerName: customName || defaultName,
-            playerActive: false,
-            text: TextResources()
+            playerName: props.customName || defaultName,
+            playerActive: props.playerActive,
         };
     }
 
     render() {
+        const text = TextResources();
+
         return (
-            <div id={this.state.id} className="player-container">
+            <div id={this.state.id} className="player-container" data-active={this.state.playerActive}>
                 <div className="player-name">{this.state.playerName}</div>
                 <div className="cards-container">
                     <ul>Cards List</ul>
                 </div>
                 <div className="player-actions">
-                    <button>{this.state.text['PLAY']}</button>
-                    <button>{this.state.text['PASS']}</button>
+                    <button>{text['PLAY']}</button>
+                    <button>{text['PASS']}</button>
                 </div>
             </div>
         );

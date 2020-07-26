@@ -10,10 +10,10 @@ const Text = {
         PLAYING_PILE: "Playing Pile",
     },
     French : {
-        PLAY: "La Play",
-        PASS: "La Pass",
-        DECK_PILE: "La Deck Pile",
-        PLAYING_PILE: "La Playing Pile",
+        PLAY: "Le Play",
+        PASS: "Le Pass",
+        DECK_PILE: "Le Deck Pile",
+        PLAYING_PILE: "Le Playing Pile",
     }
 };
 

@@ -14,6 +14,11 @@
         background: #12923d;
         margin: 10px; 
 
+        &[data-active='false'] {
+            opacity: 0.25;
+            pointer-events: none;
+        }
+
         .player-name {
             background: #023a15;
             color: #efefef;
@@ -130,6 +135,7 @@
         border: solid 1px #06471c;
         background: #12923d;
         margin: 10px;
+        z-index: 9;
 
         .card-pile {
             width: 50%;
