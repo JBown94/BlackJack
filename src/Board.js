@@ -1,4 +1,5 @@
 import React from 'react';
+import TextResources from './TextResources';
 import PlayerArea from './PlayerArea';
 
 class Board extends React.Component {
@@ -13,6 +14,10 @@ class Board extends React.Component {
       }
 
     render() {
+      const text = TextResources();
+
+      
+
         return (
           <div className="board-container">
               {this.renderPlayerArea(1)}
@@ -20,8 +25,8 @@ class Board extends React.Component {
               {this.renderPlayerArea(3)}
               {this.renderPlayerArea(4)}
               <div className="main-deck-area">
-                <div className="card-pile">Deck Pile</div>
-                <div className="card-pile">Playing Pile</div>
+                <div className="card-pile">{text.DECK_PILE}</div>
+                <div className="card-pile">{text.PLAYING_PILE}</div>
               </div>
           </div>
         );

@@ -1,4 +1,5 @@
 import React from 'react';
+import TextResources from './TextResources';
 import './PlayerArea.scss';
 
 class PlayerArea extends React.Component {
@@ -8,16 +9,11 @@ class PlayerArea extends React.Component {
         const defaultName = "Player" + props.playerNo;
         const customName = null;
 
-        const textResource = {
-            PLAY: "Play",
-            PASS: "Pass",
-        };
-
         this.state = {
             id: "player-area-" + props.playerNo,
             playerName: customName || defaultName,
             playerActive: false,
-            text: textResource
+            text: TextResources()
         };
     }
 
