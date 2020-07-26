@@ -1,5 +1,5 @@
 import React from 'react';
-import './PlayerArea.css';
+import './PlayerArea.scss';
 
 class PlayerArea extends React.Component {
     constructor(props) {

@@ -6,91 +6,90 @@
     display: grid;
     grid-template-rows: repeat(12, 1fr);
     grid-template-columns: repeat(12, 1fr);
-}
 
 .player-container {
     display: grid;
     grid-template-rows: repeat(12, 1fr);
     grid-template-columns: repeat(12, 1fr);
+
+    &#player-area-1 {
+        grid-column: 1 / span 6;
+        grid-row: 1 / span 6;
+
+        .player-name {
+            grid-column: 1 / span 12;
+        }
+
+        .cards-container {
+            grid-column: 1 / span 12;
+            grid-row: 2 / span 7;
+        }
+
+        .player-actions {
+            grid-column: 1 / span 8;
+            grid-row: 9 / span 4;
+        }
+    }
+
+    &#player-area-2 {
+        grid-column: 7 / span 6;
+        grid-row: 1 / span 6;
+    
+        .player-name {
+            grid-column: 1 / span 12;
+        }
+
+        .cards-container {
+            grid-column: 1 / span 12;
+            grid-row: 2 / span 7;
+        }
+
+        .player-actions {
+            grid-column: 5 / span 8;
+            grid-row: 9 / span 4;
+        }
+    }
+
+    &#player-area-3 {
+        grid-column: 1 / span 6;
+        grid-row: 7 / span 6;
+    
+        .player-name {
+            grid-column: 1 / span 12;
+            grid-row: 12;
+        }
+
+        .cards-container {
+            grid-column: 1 / span 12;
+            grid-row: 5 / span 7;
+        }
+
+        .player-actions {
+            grid-column: 1 / span 8;
+            grid-row: 1 / span 4;
+        }
+    }
+
+    &#player-area-4 {
+        grid-column: 7 / span 6;
+        grid-row: 7 / span 6;
+
+        .player-name {
+            grid-column: 1 / span 12;
+            grid-row: 12;
+        }
+
+        .cards-container {
+            grid-column: 1 / span 12;
+            grid-row: 5 / span 7;
+        }
+
+        .player-actions {
+            grid-column: 5 / span 8;
+            grid-row: 1 / span 4;
+        }
+    }
 }
-
-    #player-area-1 {
-        grid-column: 1 / span 6;
-        grid-row: 1 / span 6;
-    }
-
-        #player-area-1 .player-name {
-            grid-column: 1 / span 12;
-        }
-
-        #player-area-1 .cards-container {
-            grid-column: 1 / span 12;
-            grid-row: 2 / span 7;
-        }
-
-        #player-area-1 .player-actions {
-            grid-column: 1 / span 8;
-            grid-row: 9 / span 4;
-        }
-
-    #player-area-2 {
-        grid-column: 7 / span 6;
-        grid-row: 1 / span 6;
-    }
-    
-        #player-area-2 .player-name {
-            grid-column: 1 / span 12;
-        }
-
-        #player-area-2 .cards-container {
-            grid-column: 1 / span 12;
-            grid-row: 2 / span 7;
-        }
-
-        #player-area-2 .player-actions {
-            grid-column: 5 / span 8;
-            grid-row: 9 / span 4;
-        }
-
-    #player-area-3 {
-        grid-column: 1 / span 6;
-        grid-row: 7 / span 6;
-    }
-    
-        #player-area-3 .player-name {
-            grid-column: 1 / span 12;
-            grid-row: 12;
-        }
-
-        #player-area-3 .cards-container {
-            grid-column: 1 / span 12;
-            grid-row: 5 / span 7;
-        }
-
-        #player-area-3 .player-actions {
-            grid-column: 1 / span 8;
-            grid-row: 1 / span 4;
-        }
-
-    #player-area-4 {
-        grid-column: 7 / span 6;
-        grid-row: 7 / span 6;
-    }
-
-        #player-area-4 .player-name {
-            grid-column: 1 / span 12;
-            grid-row: 12;
-        }
-
-        #player-area-4 .cards-container {
-            grid-column: 1 / span 12;
-            grid-row: 5 / span 7;
-        }
-
-        #player-area-4 .player-actions {
-            grid-column: 5 / span 8;
-            grid-row: 1 / span 4;
-        }
 
     .main-deck-area {
         display: flex;
@@ -103,3 +102,4 @@
         padding: 0.75em;
         text-align: center;
     }
+}
