@@ -1,44 +1,55 @@
 .cards-container {
     border: solid 1px #bfbfbf;
     display: flex;
+    flex-wrap: wrap;
+    overflow-y: auto;
+}
 
+.card-pile {
     .card {
-        background: #eaeaea;
-        border: solid 1ps #3c3c3c;
-        border-radius: 3px;
-        margin: 5px;
-        padding: 2px;
-        height: 50%;
-        width: 15%;
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        width: 100%;
+    }
+}
 
-        display: grid;
-        grid-template-rows: repeat(6, 1fr);
-        grid-template-columns: repeat(4, 1fr);
+.card {
+    background: #eaeaea;
+    border: solid 1ps #3c3c3c;
+    border-radius: 3px;
+    margin: 5px;
+    padding: 2px;
+    height: 40%;
+    width: 10%;
 
-        .card-val {
-            grid-column: 1;
-            grid-row: 1;
-        }
+    display: grid;
+    grid-template-rows: repeat(6, 1fr);
+    grid-template-columns: repeat(4, 1fr);
 
-        .suit-img {
-            grid-column: 2 / span 2;
-            grid-row: 3 / span 2;
-            text-align: center;
-            margin: auto;
-        }
+    .card-val {
+        grid-column: 1;
+        grid-row: 1;
+    }
 
-        .card-val-reverse {
-            grid-column: 4;
-            grid-row: 6;
-            transform: rotate(180deg);
-        }
+    .suit-img {
+        grid-column: 2 / span 2;
+        grid-row: 3 / span 2;
+        text-align: center;
+        margin: auto;
+    }
 
-        &[data-suit='S'], &[data-suit='C'] {
-            color: black;
-        }
+    .card-val-reverse {
+        grid-column: 4;
+        grid-row: 6;
+        transform: rotate(180deg);
+    }
 
-        &[data-suit='H'], &[data-suit='D'] {
-            color: red;
-        }
+    &[data-suit='S'], &[data-suit='C'] {
+        color: black;
+    }
+
+    &[data-suit='H'], &[data-suit='D'] {
+        color: red;
     }
 }

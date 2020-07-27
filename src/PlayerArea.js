@@ -20,7 +20,7 @@ class PlayerArea extends React.Component {
 
     renderCard(index, value, suit) {
         return (
-            <Card key={index} value={value} suit={suit} />
+            <Card key={index} value={value} suit={suit} playable="true" />
         );
     }
 
@@ -52,7 +52,7 @@ class PlayerArea extends React.Component {
 
         return (
             <div id={this.state.id} className="player-container" data-active={this.state.playerActive}>
-                <div className="player-name">{this.state.playerName}</div>
+                <div className="player-info">{this.state.playerName}</div>
                 <div className="cards-container">
                     {playerCards}
                 </div>

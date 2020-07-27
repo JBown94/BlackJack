@@ -1,6 +1,7 @@
 import React from 'react';
 import TextResources from './TextResources';
 import PlayerArea from './PlayerArea';
+import Card from './Card';
 
 class Board extends React.Component {
     renderPlayerArea(playerNo, isActive, customName) {
@@ -28,7 +29,9 @@ class Board extends React.Component {
             {playerAreas}
             <div className="main-deck-area">
               <div className="card-pile">{text.DECK_PILE}</div>
-              <div className="card-pile">{text.PLAYING_PILE}</div>
+              <div className="card-pile">
+                <Card value="A" suit="S" playable="false" />
+              </div>
             </div>
         </div>
       );

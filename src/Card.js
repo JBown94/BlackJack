@@ -5,6 +5,7 @@ class Card extends React.Component {
         super(props);
 
         this.state = {
+            draggable: props.playable,
             value: props.value,
             suit: props.suit
         };
@@ -12,10 +13,10 @@ class Card extends React.Component {
 
     render() {
       return (
-        <div className="card" data-value={this.props.value} data-suit={this.props.suit}>
-            <div className="card-val">{this.props.value}</div>
-            <div className="suit-img">{this.props.suit}</div>
-            <div className="card-val-reverse">{this.props.value}</div>
+        <div draggable={this.state.draggable} className="card" data-value={this.state.value} data-suit={this.state.suit}>
+            <div className="card-val">{this.state.value}</div>
+            <div className="suit-img">{this.state.suit}</div>
+            <div className="card-val-reverse">{this.state.value}</div>
         </div>   
       );
     }

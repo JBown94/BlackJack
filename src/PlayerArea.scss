@@ -19,7 +19,7 @@
             pointer-events: none;
         }
 
-        .player-name {
+        .player-info {
             background: #023a15;
             color: #efefef;
             padding: 0.25em 0.75em;
@@ -48,7 +48,7 @@
             grid-column: 1 / span 6;
             grid-row: 1 / span 6;
 
-            .player-name {
+            .player-info {
                 grid-column: 1 / span 12;
             }
 
@@ -67,7 +67,7 @@
             grid-column: 7 / span 6;
             grid-row: 1 / span 6;
         
-            .player-name {
+            .player-info {
                 grid-column: 1 / span 12;
             }
 
@@ -86,7 +86,7 @@
             grid-column: 1 / span 6;
             grid-row: 7 / span 6;
         
-            .player-name {
+            .player-info {
                 grid-column: 1 / span 12;
                 grid-row: 12;
             }
@@ -106,7 +106,7 @@
             grid-column: 7 / span 6;
             grid-row: 7 / span 6;
 
-            .player-name {
+            .player-info {
                 grid-column: 1 / span 12;
                 grid-row: 12;
             }
