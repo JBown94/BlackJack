@@ -57,8 +57,8 @@ class PlayerArea extends React.Component {
                     {playerCards}
                 </div>
                 <div className="player-actions">
-                    <button>{text['PLAY']}</button>
-                    <button>{text['PASS']}</button>
+                    <button className="action-button">{text['PLAY']}</button>
+                    <button className="action-button">{text['PASS']}</button>
                 </div>
             </div>
         );

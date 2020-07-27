@@ -9,6 +9,7 @@ const Text = {
         PASS: "Pass / Pick Up",
         DECK_PILE: "Deck Pile",
         PLAYING_PILE: "Playing Pile",
+        START_GAME: "Start Game"
     },
     French : {
         PLAYER: "LePlayer",
@@ -16,6 +17,7 @@ const Text = {
         PASS: "Le Pass",
         DECK_PILE: "Le Deck Pile",
         PLAYING_PILE: "Le Playing Pile",
+        START_GAME: "Le Start a Game"
     }
 };
 

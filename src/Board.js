@@ -1,5 +1,6 @@
 import React from 'react';
 import PlayerArea from './PlayerArea';
+import TextResources from './TextResources';
 import Card from './Card';
 
 class Board extends React.Component {
@@ -7,14 +8,11 @@ class Board extends React.Component {
     super(props);
 
     this.state = {
+      gameStarted: false,
       players: [],
       deck: [],
       cardsInPlay: []
     };
-
-    //===================================================================================
-    //setTimeout(() => { this.startGame(); this.shuffleDeck(); }); //TEMP: DO NOT CHECK IN
-    //===================================================================================
   }
 
   //TODO: Finish implementing the custom initialisation of the players
@@ -29,6 +27,7 @@ class Board extends React.Component {
     }
 
     this.setState({
+      gameStarted: true,
       players: playerAreas,
       deck: cardDeck,
       cardsInPlay: [initialCard]
@@ -100,14 +99,27 @@ class Board extends React.Component {
       );
     }
   }
+  renderBoardActions() {
+    let boardActions = [];
+    let text = TextResources();
+
+    if (!this.state.gameStarted) {
+      boardActions.push(
+        <button className="start-game" onClick={() => this.startGame()}>{text.START_GAME}</button>
+      );
+    }
+
+    return (
+      <div className="board-actions">
+          {boardActions}
+      </div>
+    );
+  }
   
   render() {
     return (
       <div className="board-container">
-        <div className="board-actions">
-          <button onClick={() => this.startGame()}>Start Game</button>
-          {/* <button onClick={() => this.shuffleDeck()}>Shuffle Deck</button> */}
-        </div>
+          {this.renderBoardActions()}
           {this.state.players}
           {this.renderPlayArea()}
       </div>

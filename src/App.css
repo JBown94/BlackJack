@@ -4,7 +4,7 @@ html, body, #root {
   overflow: hidden;
 }
 
-button {
+button.action-button {
   display: inline-block;
   margin-bottom: 0.5em;
   border: solid 1px #9e9e9e;
