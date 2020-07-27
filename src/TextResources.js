@@ -5,8 +5,8 @@ const languagesCodes = {
 const Text = { 
     English : {
         PLAYER: "Player",
-        PLAY: "Play",
-        PASS: "Pass",
+        PLAY: "Play Selected",
+        PASS: "Pass / Pick Up",
         DECK_PILE: "Deck Pile",
         PLAYING_PILE: "Playing Pile",
     },
