@@ -3,15 +3,15 @@ import TextResources from './TextResources';
 import PlayerArea from './PlayerArea';
 
 class Board extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-  
     renderPlayerArea(playerNo, isActive, customName) {
-        return (
-          <PlayerArea playerNo={playerNo} playerActive={isActive} customName={customName} />
-        );
-      }
+      return (
+        <PlayerArea
+          key={playerNo}
+          playerNo={playerNo}
+          playerActive={isActive}
+          customName={customName} />
+      );
+    }
 
     render() {
       const text = TextResources();

@@ -1,0 +1,44 @@
+.cards-container {
+    border: solid 1px #bfbfbf;
+    display: flex;
+
+    .card {
+        background: #eaeaea;
+        border: solid 1ps #3c3c3c;
+        border-radius: 3px;
+        margin: 5px;
+        padding: 2px;
+        height: 50%;
+        width: 15%;
+
+        display: grid;
+        grid-template-rows: repeat(6, 1fr);
+        grid-template-columns: repeat(4, 1fr);
+
+        .card-val {
+            grid-column: 1;
+            grid-row: 1;
+        }
+
+        .suit-img {
+            grid-column: 2 / span 2;
+            grid-row: 3 / span 2;
+            text-align: center;
+            margin: auto;
+        }
+
+        .card-val-reverse {
+            grid-column: 4;
+            grid-row: 6;
+            transform: rotate(180deg);
+        }
+
+        &[data-suit='S'], &[data-suit='C'] {
+            color: black;
+        }
+
+        &[data-suit='H'], &[data-suit='D'] {
+            color: red;
+        }
+    }
+}

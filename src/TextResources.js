@@ -4,12 +4,14 @@ const languagesCodes = {
 
 const Text = { 
     English : {
+        PLAYER: "Player",
         PLAY: "Play",
         PASS: "Pass",
         DECK_PILE: "Deck Pile",
         PLAYING_PILE: "Playing Pile",
     },
     French : {
+        PLAYER: "LePlayer",
         PLAY: "Le Play",
         PASS: "Le Pass",
         DECK_PILE: "Le Deck Pile",
