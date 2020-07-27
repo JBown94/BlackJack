@@ -1,5 +1,4 @@
 import React from 'react';
-import TextResources from './TextResources';
 import PlayerArea from './PlayerArea';
 import Card from './Card';
 
@@ -14,27 +13,29 @@ class Board extends React.Component {
     };
 
     //===================================================================================
-    setTimeout(() => { this.startGame(); this.shuffleDeck(); }); //TEMP: DO NOT CHECK IN
+    //setTimeout(() => { this.startGame(); this.shuffleDeck(); }); //TEMP: DO NOT CHECK IN
     //===================================================================================
   }
 
   //TODO: Finish implementing the custom initialisation of the players
   startGame() {
+    let cardDeck = this.shuffleDeck();
+    let initialCard = cardDeck.shift();
+
     let playerAreas = [];
 
     for(var i = 1; i <= 4; i++) {
-      playerAreas.push(this.renderPlayerArea(i, true, null));
+      playerAreas.push(this.renderGamePlayer(i, true, null));
     }
 
     this.setState({
-      players: playerAreas
+      players: playerAreas,
+      deck: cardDeck,
+      cardsInPlay: [initialCard]
     });
-
-    //this.shuffleDeck();
   }
 
-  //TODO: create a shuffle method, to randomise the list of 52 cards
-  shuffleDeck() {
+  generateDeck() {
     const values = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
     const suits = ["S", "C", "H", "D"];
 
@@ -46,52 +47,72 @@ class Board extends React.Component {
         let value = values[v];
         let key = value + "_" + suit;
 
-        cardDeck.push(<Card key={key} value={value} suit={suit} hidden="true" playable="false" />);
+        cardDeck.push(<Card key={key} value={value} suit={suit} hidden="false" playable="false" />);
       }
     }
 
-    this.setState({
-      deck: cardDeck
-    });
+    return cardDeck;
+  }
+  shuffleDeck() {
+    let cardDeck = this.generateDeck();
+    let shuffles = 1000000;
+
+    for(var i = 0; i < shuffles; i++) {
+      for (var j = cardDeck.length-1; j > 0; j--) {
+        const shuffleIdx = Math.floor(Math.random() * cardDeck.length);
+
+        let cardToShuffle = cardDeck[j];
+
+        cardDeck[j] = cardDeck[shuffleIdx]; 
+        cardDeck[shuffleIdx] = cardToShuffle; 
+      }
+    }
+
+    return cardDeck;
   }
 
-    renderPlayerArea(playerNo, isActive, customName) {
-      return (
-        <PlayerArea
-          key={playerNo}
-          playerNo={playerNo}
-          playerActive={isActive}
-          customName={customName} />
-      );
-    }
+  renderGamePlayer(playerNo, isActive, customName) {
+    return (
+      <PlayerArea
+        key={playerNo}
+        playerNo={playerNo}
+        playerActive={isActive}
+        customName={customName} />
+    );
+  }
+  renderPlayArea() {
+    if (this.state.players.length > 0) {
+      const cards = this.state.cardsInPlay;
+      const currentCard = (cards.length > 0) ? cards[0]: null;
 
-    renderPlayArea() {
-      if (this.state.players.length > 0) {
-        return (
-          <div className="main-deck-area">
-            <div className="card-pile deck-pile">
+      return (
+        <div className="main-deck-area">
+          <div className="card-pile">
+            <Card value="" suit="" playable="false" hidden="true" />
+            <div class="deck-pile">
               {this.state.deck}
             </div>
-            <div className="card-pile playing-pile">
-              {/* <Card value="A" suit="S" playable="false" /> */}
-            </div>
           </div>
-        );
-      }
-    }
-    
-    render() {
-      return (
-        <div className="board-container">
-          <div className="board-actions">
-            <button onClick={() => this.startGame()}>Start Game</button>
-            <button onClick={() => this.shuffleDeck()}>Shuffle Deck</button>
+          <div className="card-pile">
+            {currentCard}
           </div>
-            {this.state.players}
-            {this.renderPlayArea()}
         </div>
       );
     }
+  }
+  
+  render() {
+    return (
+      <div className="board-container">
+        <div className="board-actions">
+          <button onClick={() => this.startGame()}>Start Game</button>
+          {/* <button onClick={() => this.shuffleDeck()}>Shuffle Deck</button> */}
+        </div>
+          {this.state.players}
+          {this.renderPlayArea()}
+      </div>
+    );
+  }
 }
 
 export default Board;

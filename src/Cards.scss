@@ -6,6 +6,11 @@
 }
 
 .card-pile {
+
+    .deck-pile .card {
+        display: none;
+    }
+
     .card {
         margin: 0;
         padding: 0;
