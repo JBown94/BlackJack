@@ -14,7 +14,8 @@ class Card extends React.Component {
             draggable: draggable,
             value: props.value,
             suit: props.suit,
-            selected: false
+            hidden: props.hidden,
+            selected: false,
         };
     }
 
@@ -32,6 +33,7 @@ class Card extends React.Component {
       return (
         <div className="card" data-value={this.state.value} data-suit={this.state.suit}
             data-selected={this.state.selected}
+            data-hidden={this.state.hidden}
             draggable={this.state.draggable}
             onClick={() => this.toggleSelection()}>
             <div className="card-val">{this.state.value}</div>

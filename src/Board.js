@@ -12,8 +12,13 @@ class Board extends React.Component {
       deck: [],
       cardsInPlay: []
     };
+
+    //===================================================================================
+    setTimeout(() => { this.startGame(); this.shuffleDeck(); }); //TEMP: DO NOT CHECK IN
+    //===================================================================================
   }
 
+  //TODO: Finish implementing the custom initialisation of the players
   startGame() {
     let playerAreas = [];
 
@@ -33,7 +38,6 @@ class Board extends React.Component {
     const values = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
     const suits = ["S", "C", "H", "D"];
 
-    let state = this.state;
     let cardDeck = [];
 
     for(var s = 0; s < suits.length;s++) {
@@ -42,7 +46,7 @@ class Board extends React.Component {
         let value = values[v];
         let key = value + "_" + suit;
 
-        cardDeck.push(<Card key={key} value={value} suit={suit} playable="false" />);
+        cardDeck.push(<Card key={key} value={value} suit={suit} hidden="true" playable="false" />);
       }
     }
 
@@ -65,26 +69,18 @@ class Board extends React.Component {
       if (this.state.players.length > 0) {
         return (
           <div className="main-deck-area">
-            <div className="card-pile">
+            <div className="card-pile deck-pile">
               {this.state.deck}
             </div>
-            <div className="card-pile">
+            <div className="card-pile playing-pile">
               {/* <Card value="A" suit="S" playable="false" /> */}
             </div>
           </div>
         );
       }
     }
-
+    
     render() {
-      let playerAreas = [];
-
-      //TODO: Finish implementing the custom initialisation of the players
-      //  - I.e. Display the players & enter custom names, which persists across sessions
-      for(var i = 1; i <=4; i++) {
-        playerAreas.push(this.renderPlayerArea(i, true, null));
-      }
-
       return (
         <div className="board-container">
           <div className="board-actions">

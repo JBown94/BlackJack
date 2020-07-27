@@ -132,6 +132,10 @@
             text-align: center;
             border: solid 1px #06471c;
             background: #076325;
+
+            &.deck-pile {
+                overflow: hidden;
+            }
         }
     }
 }
