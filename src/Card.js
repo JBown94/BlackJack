@@ -4,8 +4,14 @@ class Card extends React.Component {
     constructor(props) {
         super(props);
 
+        let draggable = props.playable;
+
+        if (draggable === undefined) {
+            draggable = true;
+        } 
+
         this.state = {
-            draggable: props.playable,
+            draggable: draggable,
             value: props.value,
             suit: props.suit,
             selected: false

@@ -36,12 +36,12 @@ class PlayerArea extends React.Component {
         //  - Preferably generate the entire list of 52 cards, then shuffle them & use the next
         //    card in the array
 
-        for (var i=0; i < 7; i++) {
-            let cardValue = values[Math.floor(Math.random() * values.length)];
-            let cardSuit = suits[Math.floor(Math.random() * suits.length)];
+        // for (var i = 0; i < 7; i++) {
+        //     let cardValue = values[Math.floor(Math.random() * values.length)];
+        //     let cardSuit = suits[Math.floor(Math.random() * suits.length)];
 
-            playerCards.push(this.renderCard(i, cardValue, cardSuit));
-        }
+        //     playerCards.push(this.renderCard(i, cardValue, cardSuit));
+        // }
 
         return playerCards;
     }
