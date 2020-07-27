@@ -1,3 +1,6 @@
+$red-suit-colour: red;
+$black-suit-colour: black;
+
 .cards-container {
     border: solid 1px #bfbfbf;
     display: flex;
@@ -27,6 +30,7 @@
     padding: 2px;
     height: 40%;
     width: 10%;
+    font-size: 19px;
     transition: all 0.1s;
 
     display: grid;
@@ -36,27 +40,54 @@
     .card-val {
         grid-column: 1;
         grid-row: 1;
+        margin: auto;
     }
 
     .suit-img {
         grid-column: 2 / span 2;
         grid-row: 3 / span 2;
-        text-align: center;
-        margin: auto;
     }
 
     .card-val-reverse {
         grid-column: 4;
         grid-row: 6;
+        margin: auto;
         transform: rotate(180deg);
     }
 
     &[data-suit='S'], &[data-suit='C'] {
-        color: black;
+        color: $black-suit-colour;
     }
 
     &[data-suit='H'], &[data-suit='D'] {
-        color: red;
+        color: $red-suit-colour;
+    }
+
+        //TODO: Make the other suit shapes via CSS
+        &[data-suit='S'] .suit-img::after {
+            content: "S";
+        }
+
+        &[data-suit='C'] .suit-img::after {
+            content: "C";
+        }
+
+        &[data-suit='H'] .suit-img::after {
+            content: "H";
+        }
+
+        &[data-suit='D'] .suit-img {
+            background: $red-suit-colour;
+            transform: rotate(45deg);
+            margin: auto;
+            width: 45px;
+            height: 45px;
+        }
+
+    &[data-value='6'], &[data-value='9'] {
+        .card-val, .card-val-reverse {
+            text-decoration: underline;
+        }
     }
 
     &[data-selected='true'] {

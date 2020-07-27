@@ -9,12 +9,13 @@ class PlayerArea extends React.Component {
         super(props);
 
         const text = TextResources();
-        const defaultName = text['PLAYER'] + props.playerNo;
+        const defaultName = text.PLAYER + props.playerNo;
 
         this.state = {
             id: "player-area-" + props.playerNo,
             playerName: props.customName || defaultName,
             playerActive: props.playerActive,
+            playerCards: []
         };
     }
 
@@ -48,17 +49,17 @@ class PlayerArea extends React.Component {
 
     render() {
         const text = TextResources();
-        const playerCards = this.generatePlayerCards();
+        // const playerCards = this.generatePlayerCards();
 
         return (
             <div id={this.state.id} className="player-container" data-active={this.state.playerActive}>
                 <div className="player-info">{this.state.playerName}</div>
                 <div className="cards-container">
-                    {playerCards}
+                    {this.state.playerCards}
                 </div>
                 <div className="player-actions">
-                    <button className="action-button">{text['PLAY']}</button>
-                    <button className="action-button">{text['PASS']}</button>
+                    <button className="action-button">{text.PLAY}</button>
+                    <button className="action-button">{text.PASS}</button>
                 </div>
             </div>
         );

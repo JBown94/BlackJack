@@ -32,6 +32,19 @@ class Board extends React.Component {
       deck: cardDeck,
       cardsInPlay: [initialCard]
     });
+
+    this.dealCards();
+  }
+
+  dealCards() {
+    let players = this.state.players;
+    let cardsToDeal = 7;
+
+    for (var i = 0; i < cardsToDeal; i++) {
+      for (var j = 0; j < players.length; j++) {
+        console.log(players[j]);
+      }
+    }
   }
 
   generateDeck() {
@@ -88,7 +101,7 @@ class Board extends React.Component {
         <div className="main-deck-area">
           <div className="card-pile">
             <Card value="" suit="" playable="false" hidden="true" />
-            <div class="deck-pile">
+            <div className="deck-pile">
               {this.state.deck}
             </div>
           </div>
@@ -105,7 +118,7 @@ class Board extends React.Component {
 
     if (!this.state.gameStarted) {
       boardActions.push(
-        <button className="start-game" onClick={() => this.startGame()}>{text.START_GAME}</button>
+        <button key="start" className="start-game" onClick={() => this.startGame()}>{text.START_GAME}</button>
       );
     }
 

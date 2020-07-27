@@ -37,7 +37,7 @@ class Card extends React.Component {
             draggable={this.state.draggable}
             onClick={() => this.toggleSelection()}>
             <div className="card-val">{this.state.value}</div>
-            <div className="suit-img">{this.state.suit}</div>
+            <div className="suit-img"></div>
             <div className="card-val-reverse">{this.state.value}</div>
         </div>   
       );
