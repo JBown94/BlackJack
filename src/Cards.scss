@@ -68,20 +68,19 @@ $black-suit-colour: black;
             content: "S";
         }
 
-        &[data-suit='C'] .suit-img::after {
-            content: "C";
+        &[data-suit='C'] .suit-img {
+            clip-path: polygon(53% 100%, 55% 70%, 69% 78%, 85% 76%, 93% 64%, 95% 49%, 87% 43%, 72% 39%, 61% 43%, 64% 33%, 74% 26%, 69% 19%, 56% 15%, 45% 19%, 37% 25%, 35% 32%, 42% 38%, 48% 44%, 47% 50%, 42% 46%, 31% 41%, 22% 47%, 15% 54%, 14% 63%, 19% 70%, 26% 76%, 37% 76%, 46% 72%, 45% 100%);
+            background: $black-suit-colour;
         }
 
-        &[data-suit='H'] .suit-img::after {
-            content: "H";
+        &[data-suit='H'] .suit-img {
+            clip-path: polygon(48% 99%, 80% 64%, 79% 54%, 76% 48%, 70% 44%, 64% 40%, 61% 39%, 58% 39%, 56% 43%, 55% 48%, 55% 52%, 52% 57%, 50% 55%, 50% 53%, 50% 49%, 49% 44%, 49% 41%, 48% 39%, 46% 38%, 41% 36%, 37% 37%, 32% 39%, 29% 42%, 26% 48%, 24% 53%, 22% 59%, 22% 63%, 24% 68%);
+            background: $red-suit-colour;
         }
 
         &[data-suit='D'] .suit-img {
+            clip-path: polygon(25% 50%, 50% 10%, 75% 50%, 50% 90%);
             background: $red-suit-colour;
-            transform: rotate(45deg);
-            margin: auto;
-            width: 45px;
-            height: 45px;
         }
 
     &[data-value='6'], &[data-value='9'] {

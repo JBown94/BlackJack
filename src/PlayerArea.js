@@ -15,7 +15,7 @@ class PlayerArea extends React.Component {
             id: "player-area-" + props.playerNo,
             playerName: props.customName || defaultName,
             playerActive: props.playerActive,
-            playerCards: []
+            playerCards: props.cards || []
         };
     }
 

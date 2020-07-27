@@ -11,7 +11,8 @@ class Board extends React.Component {
       gameStarted: false,
       players: [],
       deck: [],
-      cardsInPlay: []
+      cardsInPlay: [],
+      text: TextResources()
     };
   }
 
@@ -23,7 +24,11 @@ class Board extends React.Component {
     let playerAreas = [];
 
     for(var i = 1; i <= 4; i++) {
-      playerAreas.push(this.renderGamePlayer(i, true, null));
+      let playerActive = true;
+      let playerName = null;
+      let playerCards = playerActive ? cardDeck.splice(0, 7) : [];
+
+      playerAreas.push(this.renderGamePlayer(i, playerActive, playerName, playerCards));
     }
 
     this.setState({
@@ -32,19 +37,6 @@ class Board extends React.Component {
       deck: cardDeck,
       cardsInPlay: [initialCard]
     });
-
-    this.dealCards();
-  }
-
-  dealCards() {
-    let players = this.state.players;
-    let cardsToDeal = 7;
-
-    for (var i = 0; i < cardsToDeal; i++) {
-      for (var j = 0; j < players.length; j++) {
-        console.log(players[j]);
-      }
-    }
   }
 
   generateDeck() {
@@ -59,7 +51,7 @@ class Board extends React.Component {
         let value = values[v];
         let key = value + "_" + suit;
 
-        cardDeck.push(<Card key={key} value={value} suit={suit} hidden="false" playable="false" />);
+        cardDeck.push(<Card key={key} value={value} suit={suit} hidden="false" playable="true" />);
       }
     }
 
@@ -83,13 +75,14 @@ class Board extends React.Component {
     return cardDeck;
   }
 
-  renderGamePlayer(playerNo, isActive, customName) {
+  renderGamePlayer(playerNo, isActive, customName, hand) {
     return (
       <PlayerArea
         key={playerNo}
         playerNo={playerNo}
         playerActive={isActive}
-        customName={customName} />
+        customName={customName}
+        cards={hand} />
     );
   }
   renderPlayArea() {
@@ -113,8 +106,8 @@ class Board extends React.Component {
     }
   }
   renderBoardActions() {
+    let text = this.state.text;
     let boardActions = [];
-    let text = TextResources();
 
     if (!this.state.gameStarted) {
       boardActions.push(
