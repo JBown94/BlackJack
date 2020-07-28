@@ -10,6 +10,7 @@ const Text = {
         DECK_PILE: "Deck Pile",
         PLAYING_PILE: "Playing Pile",
         START_GAME: "Start Game",
+        SHOW_RULES: "Show Rules",
         DEAL_CARDS: "Deal Cards"
     },
     French : {
@@ -19,7 +20,8 @@ const Text = {
         DECK_PILE: "Le Deck Pile",
         PLAYING_PILE: "Le Playing Pile",
         START_GAME: "Le Start a Game",
-        DEAL_CARDS: "Le Deal a Cards"
+        SHOW_RULES: "Le Show un Rules",
+        DEAL_CARDS: "Le Deal un Cards"
     }
 };
 

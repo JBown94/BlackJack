@@ -44,6 +44,9 @@ class Board extends React.Component {
       activePlayer: activePlayer
     });
   }
+  showRules() {
+    alert("Not Implemented: Show Game Rules");
+  }
 
   handleClick(actionName) {
     switch(actionName) {
@@ -142,6 +145,9 @@ class Board extends React.Component {
     if (!this.state.gameStarted) {
       boardActions.push(
         <button key="start" className="start-game" onClick={() => this.startGame()}>{text.START_GAME}</button>
+      );
+      boardActions.push(
+        <button key="rules" className="show-rules" onClick={() => this.showRules()}>{text.SHOW_RULES}</button>
       );
     }
 

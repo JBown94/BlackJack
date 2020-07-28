@@ -1,6 +1,6 @@
 
 .board-container {
-    background: #3c3c3c;
+    background: #336699;
     height: 100%;
     display: grid;
     grid-template-rows: repeat(12, 1fr);
@@ -15,16 +15,33 @@
         grid-row: 1 / span 12;
 
         button {
-            border: solid 1px #efefef;
-
+            border: solid 2px #3c3c3c;
             display: inline-block;
-            border-radius: 5px;
+            border-radius: 15px;
+            margin-bottom: 1px;
+            cursor: pointer;
+            transition: all 0.1s;
 
             &.start-game {
                 grid-column: 4 / span 6;
                 grid-row: 6 / span 2;
 
                 font-size: 56px;
+            }
+            &.show-rules {
+                grid-column: 4 / span 6;
+                grid-row: 8 / span 1;
+
+                font-size: 34px;
+            }
+
+            &:hover {
+                box-shadow: 0 0 2px 1px black;
+                background: #3c3c3c;
+                color: #efefef;
+            }
+            &:active {
+                background: #bfbfbf;
             }
         }
 
