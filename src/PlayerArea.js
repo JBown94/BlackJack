@@ -5,11 +5,12 @@ import './PlayerArea.scss';
 import './Cards.scss';
 
 export class PlayerAreaData {
-    constructor(playerNo, playerName, playerActive, playerCards) {
+    constructor(playerNo, playerName, playerActive, playerCards, isCurrentTurn) {
         this.playerNo = playerNo;
         this.playerName = playerName;
         this.playerActive = playerActive;
         this.playerCards = playerCards || [];
+        this.isCurrentTurn = isCurrentTurn;
     }
 }
 
@@ -24,7 +25,8 @@ class PlayerArea extends React.Component {
             id: "player-area-" + props.playerNo,
             playerName: props.customName || defaultName,
             playerActive: props.playerActive,
-            playerCards: props.cards || []
+            playerCards: props.cards || [],
+            isCurrentTurn: props.isCurrentTurn,
         };
     }
 
@@ -48,8 +50,14 @@ class PlayerArea extends React.Component {
         const text = TextResources();
 
         return (
-            <div id={this.state.id} className="player-container" data-active={this.state.playerActive}>
-                <div className="player-info">{this.state.playerName}</div>
+            <div className="player-container"
+                id={this.state.id}
+                data-active={this.state.playerActive}
+                data-is-turn={this.state.isCurrentTurn}>
+                <div className="player-info">
+                    <div className="player-name">{this.state.playerName}</div>
+                    <div className="is-turn-indicator"></div>
+                </div>
                 <div className="cards-container">
                     {this.renderPlayerCards()}
                 </div>

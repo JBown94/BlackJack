@@ -26,10 +26,10 @@ class Board extends React.Component {
     for(var i = 1; i <= 4; i++) {
       let playerActive = true;
       let playerName = null;
+      let isCurrentTurn = (i === 1);
       let playerCards = playerActive ? cardDeck.splice(0, 7) : [];
 
-      playerAreas.push(new PlayerAreaData(i, playerName, playerActive, playerCards));
-      //playerAreas.push(this.renderGamePlayer(i, playerActive, playerName, playerCards));
+      playerAreas.push(new PlayerAreaData(i, playerName, playerActive, playerCards, isCurrentTurn));
     }
 
     this.setState({
@@ -48,12 +48,7 @@ class Board extends React.Component {
 
     for(var s = 0; s < suits.length;s++) {
       for(var v = 0; v < values.length; v++) {
-        let value = values[v];
-        let suit = suits[s];
-        // let key = value + "_" + suit;
-
-        cardDeck.push(new CardData(value, suit));
-        //cardDeck.push(<Card key={key} value={value} suit={suit} hidden="false" playable="true" />);
+        cardDeck.push(new CardData(values[v], suits[s]));
       }
     }
 
@@ -61,7 +56,7 @@ class Board extends React.Component {
   }
   shuffleDeck() {
     let cardDeck = this.generateDeck();
-    let shuffles = 1000000;
+    let shuffles = 100000;
 
     for(var i = 0; i < shuffles; i++) {
       for (var j = cardDeck.length-1; j > 0; j--) {
@@ -103,7 +98,7 @@ class Board extends React.Component {
 
       playerAreas.push(
         <PlayerArea key={playerNo} playerNo={playerNo} playerActive={playerData.playerActive}
-          customName={playerData.playerName}
+          customName={playerData.playerName} isCurrentTurn={playerData.isCurrentTurn}
           cards={playerData.playerCards} />
       );
     }

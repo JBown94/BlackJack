@@ -58,9 +58,9 @@ $black-suit-colour: black;
         color: $red-suit-colour;
     }
 
-        //TODO: Make the other suit shapes via CSS
-        &[data-suit='S'] .suit-img::after {
-            content: "S";
+        &[data-suit='S'] .suit-img {
+            clip-path: polygon(54% 100%, 56% 72%, 61% 76%, 62% 79%, 66% 80%, 68% 81%, 72% 81%, 77% 80%, 81% 80%, 82% 78%, 83% 76%, 84% 75%, 86% 74%, 86% 70%, 86% 67%, 86% 63%, 83% 61%, 81% 58%, 80% 56%, 79% 57%, 76% 52%, 74% 48%, 73% 45%, 71% 41%, 68% 38%, 65% 34%, 63% 32%, 61% 29%, 58% 25%, 55% 23%, 55% 22%, 52% 19%, 51% 23%, 48% 25%, 47% 29%, 46% 32%, 46% 34%, 45% 38%, 44% 41%, 40% 45%, 37% 51%, 35% 56%, 33% 60%, 30% 63%, 28% 66%, 27% 70%, 27% 74%, 29% 76%, 34% 79%, 38% 80%, 39% 80%, 43% 80%, 48% 78%, 49% 76%, 47% 100%);
+            background: $black-suit-colour;
         }
 
         &[data-suit='C'] .suit-img {
@@ -89,6 +89,15 @@ $black-suit-colour: black;
     }
 
     &[data-hidden='true'] {
+        border: solid 2px $black-suit-colour;
+        background-image:
+            linear-gradient(45deg, $red-suit-colour 25%, transparent 25%), 
+            linear-gradient(-45deg, $red-suit-colour 25%, transparent 25%),
+            linear-gradient(45deg, transparent 75%, $red-suit-colour 75%),
+            linear-gradient(-45deg, transparent 75%, $red-suit-colour 75%);
+        background-size:20px 20px;    
+        background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+
         .card-val, .suit-img, .card-val-reverse {
             display: none;
         }

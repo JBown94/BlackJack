@@ -49,6 +49,19 @@
             padding: 0.25em 0.75em;
             font-size: 18px; 
             font-weight: bold;
+
+            .player-name {
+                display: inline-block;
+                margin-right: 0.75em;
+            }
+
+            .is-turn-indicator {
+                display: inline-block;
+                height: 15px;
+                width: 15px;
+                border: solid 1px black;
+                border-radius: 10px;
+            }
         }
 
         .player-actions {
@@ -131,6 +144,21 @@
                 grid-column: 5 / span 8;
                 grid-row: 1 / span 4;
             }
+        }
+    }
+
+    .player-container[data-is-turn='true'] {
+        .is-turn-indicator {
+            background: linear-gradient(-15deg, orange, orangered, orange);
+        }
+    }
+
+    .player-container[data-is-turn='false'] {
+        opacity: 0.65;
+        pointer-events: none;
+
+        .is-turn-indicator {
+            background: linear-gradient(-15deg, #3c3c3c, #7c7c7c7c, #5c5c5c);
         }
     }
 
