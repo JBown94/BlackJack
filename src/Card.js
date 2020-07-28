@@ -20,9 +20,6 @@ class Card extends React.Component {
 
         this.state = {
             draggable: draggable,
-            value: props.value,
-            suit: props.suit,
-            hidden: props.hidden,
             selected: false,
         };
     }
@@ -58,17 +55,17 @@ class Card extends React.Component {
 
     render() {
       return (
-        <div className="card" data-value={this.state.value} data-suit={this.state.suit}
-            data-selected={this.state.selected} data-hidden={this.state.hidden}
+        <div className="card" data-value={this.props.value} data-suit={this.props.suit}
+            data-selected={this.state.selected} data-hidden={this.props.hidden}
             draggable={this.state.draggable}
             
             onDragStart={e => this.dragStart(e)}
             onDragEnd={e => this.dragEnd(e)}
             onClick={() => this.toggleSelection()}>
             
-            <div className="card-val">{this.state.value}</div>
+            <div className="card-val">{this.props.value}</div>
             <div className="suit-img"></div>
-            <div className="card-val-reverse">{this.state.value}</div>
+            <div className="card-val-reverse">{this.props.value}</div>
         </div>   
       );
     }

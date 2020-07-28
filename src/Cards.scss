@@ -50,6 +50,10 @@ $black-suit-colour: black;
         transform: rotate(180deg);
     }
 
+    &[draggable='true'] {
+        cursor: grab;
+    }
+
     &[data-suit='S'], &[data-suit='C'] {
         color: $black-suit-colour;
     }

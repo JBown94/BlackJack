@@ -9,6 +9,7 @@ button.action-button {
   margin-bottom: 0.5em;
   border: solid 1px #9e9e9e;
   border-radius: 5px;
+  cursor: pointer;
   height: 40%;
   width: 100%;
 

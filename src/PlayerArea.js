@@ -24,14 +24,11 @@ class PlayerArea extends React.Component {
         this.state = {
             id: "player-area-" + props.playerNo,
             playerName: props.customName || defaultName,
-            playerActive: props.playerActive,
-            playerCards: props.cards || [],
-            isCurrentTurn: props.isCurrentTurn,
         };
     }
 
     renderPlayerCards() {
-        const cards = this.state.playerCards;
+        const cards = this.props.cards;
         let playerHand = [];
 
         for (var i = 0; i < cards.length; i++) {
@@ -42,7 +39,9 @@ class PlayerArea extends React.Component {
     }
     renderCard(data) {
         return (
-            <Card key={data.key} value={data.value} suit={data.suit} playable="true" />
+            <Card key={data.key} value={data.value} suit={data.suit} 
+                playable="true" 
+                hidden={!this.props.isCurrentTurn} />
         );
     }
 
@@ -52,8 +51,8 @@ class PlayerArea extends React.Component {
         return (
             <div className="player-container"
                 id={this.state.id}
-                data-active={this.state.playerActive}
-                data-is-turn={this.state.isCurrentTurn}>
+                data-active={this.props.playerActive}
+                data-is-turn={this.props.isCurrentTurn}>
                 <div className="player-info">
                     <div className="player-name">{this.state.playerName}</div>
                     <div className="is-turn-indicator"></div>
@@ -62,8 +61,8 @@ class PlayerArea extends React.Component {
                     {this.renderPlayerCards()}
                 </div>
                 <div className="player-actions">
-                    <button className="action-button">{text.PLAY}</button>
-                    <button className="action-button">{text.PASS}</button>
+                    <button className="action-button" onClick={() => this.props.onClick("PLAY")}>{text.PLAY}</button>
+                    <button className="action-button" onClick={() => this.props.onClick("PASS")}>{text.PASS}</button>
                 </div>
             </div>
         );

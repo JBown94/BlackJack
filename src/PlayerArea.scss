@@ -107,26 +107,6 @@
         }
 
         &#player-area-3 {
-            grid-column: 1 / span 6;
-            grid-row: 7 / span 6;
-        
-            .player-info {
-                grid-column: 1 / span 12;
-                grid-row: 12;
-            }
-
-            .cards-container {
-                grid-column: 1 / span 12;
-                grid-row: 5 / span 7;
-            }
-
-            .player-actions {
-                grid-column: 1 / span 8;
-                grid-row: 1 / span 4;
-            }
-        }
-
-        &#player-area-4 {
             grid-column: 7 / span 6;
             grid-row: 7 / span 6;
 
@@ -142,6 +122,26 @@
 
             .player-actions {
                 grid-column: 5 / span 8;
+                grid-row: 1 / span 4;
+            }
+        }
+
+        &#player-area-4 {
+            grid-column: 1 / span 6;
+            grid-row: 7 / span 6;
+        
+            .player-info {
+                grid-column: 1 / span 12;
+                grid-row: 12;
+            }
+
+            .cards-container {
+                grid-column: 1 / span 12;
+                grid-row: 5 / span 7;
+            }
+
+            .player-actions {
+                grid-column: 1 / span 8;
                 grid-row: 1 / span 4;
             }
         }

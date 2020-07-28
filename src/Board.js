@@ -4,6 +4,8 @@ import Card, { CardData } from './Card';
 import TextResources from './TextResources';
 
 class Board extends React.Component {
+  static MAX_PLAYERS = 4;
+
   constructor(props) {
     super(props);
 
@@ -11,7 +13,8 @@ class Board extends React.Component {
       gameStarted: false,
       players: [],
       deck: [],
-      cardsInPlay: [],
+      cardInPlay: null,
+      activePlayer: null,
       text: TextResources()
     };
   }
@@ -22,11 +25,12 @@ class Board extends React.Component {
     let initialCard = cardDeck.shift();
 
     let playerAreas = [];
+    let activePlayer = 1; 
 
-    for(var i = 1; i <= 4; i++) {
+    for(var i = 1; i <= Board.MAX_PLAYERS; i++) {
       let playerActive = true;
       let playerName = null;
-      let isCurrentTurn = (i === 1);
+      let isCurrentTurn = i === activePlayer;
       let playerCards = playerActive ? cardDeck.splice(0, 7) : [];
 
       playerAreas.push(new PlayerAreaData(i, playerName, playerActive, playerCards, isCurrentTurn));
@@ -36,7 +40,66 @@ class Board extends React.Component {
       gameStarted: true,
       players: playerAreas,
       deck: cardDeck,
-      cardsInPlay: [initialCard]
+      cardInPlay: initialCard,
+      activePlayer: activePlayer
+    });
+  }
+
+  handleClick(actionName) {
+    switch(actionName) {
+      case "PLAY": this.onPlayerTurnGo(); break;
+      case "PASS": this.onPlayerTurnPass(); break;
+      default: console.log("Action Not Found");
+    }
+  }
+
+  onPlayerTurnGo() {
+    console.log("Play Selected Cards");
+    console.log(this.state);
+
+    this.toNextPlayer();
+    
+    //TODO: Get a list of the selected cards for the current player, then;
+    //  - Check if the selected cards are valid, if true, then;
+    //    - Move the last card from the player selection to the 'cardInPlay' prop
+    //    - Move the other cards (if applicable) to the end of the 'deck' array
+    //    - Move onto the next players go
+    //  - If not, then notify user to select different cards
+  }
+  onPlayerTurnPass() {
+    console.log("Pass Go / Pick Up Cards");
+    console.log(this.state);
+
+    this.toNextPlayer();
+
+    //TODO: Check the 'cardInPlay' for either a 2 or a BlackJack (or a stack of them)
+    //  - To determine the stack (if any), check the 'deck' array, starting from the end of the array
+    //  - If no 2's or BlackJack's, then the pickup value is 1
+    //  - Once the pickup value is determined;
+    //    - Move that number of cards from the top of the deck to that players hand
+    //  - Move onto the next players go
+  }
+
+  toNextPlayer() {
+    let players = this.state.players;
+    let lastPlayer = this.state.activePlayer;
+    let nextPlayer = lastPlayer;
+
+    do {
+      nextPlayer++;
+
+      if (nextPlayer > Board.MAX_PLAYERS) {
+        nextPlayer = 1;
+      }
+    }
+    while (!players[nextPlayer - 1].playerActive)
+
+    players[lastPlayer - 1].isCurrentTurn = false;
+    players[nextPlayer - 1].isCurrentTurn = true;
+
+    this.setState({
+      players: players,
+      activePlayer: nextPlayer
     });
   }
 
@@ -99,7 +162,7 @@ class Board extends React.Component {
       playerAreas.push(
         <PlayerArea key={playerNo} playerNo={playerNo} playerActive={playerData.playerActive}
           customName={playerData.playerName} isCurrentTurn={playerData.isCurrentTurn}
-          cards={playerData.playerCards} />
+          cards={playerData.playerCards} onClick={e => this.handleClick(e)} />
       );
     }
 
@@ -107,19 +170,8 @@ class Board extends React.Component {
   }
   renderPlayArea() {
     if (this.state.players.length > 0) {
-      const cards = this.state.cardsInPlay;
-      const data = (cards.length > 0) ? cards[0]: null;
-
-      let currentCard = null;
-      
-      if (data !== null) {
-        currentCard = <Card
-                key={data.key} 
-                value={data.value}
-                suit={data.suit}
-                hidden="false"
-                playable="false" />
-      }
+      const data = this.state.cardInPlay;
+      const card = <Card key={data.key} value={data.value} suit={data.suit} hidden="false" playable="false" />;
 
       return (
         <div className="main-deck-area">
@@ -127,7 +179,7 @@ class Board extends React.Component {
             <Card key="deck" value="" suit="" playable="false" hidden="true" />
           </div>
           <div className="card-pile">
-            {currentCard}
+            {card}
           </div>
         </div>
       );
