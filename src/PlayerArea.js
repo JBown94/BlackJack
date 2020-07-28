@@ -35,14 +35,14 @@ class PlayerArea extends React.Component {
         let playerHand = [];
 
         for (var i = 0; i < cards.length; i++) {
-            playerHand.push(this.renderCard(i, cards[i]));
+            playerHand.push(this.renderCard(cards[i]));
         }
 
         return playerHand;
     }
-    renderCard(index, data) {
+    renderCard(data) {
         return (
-            <Card key={index} value={data.value} suit={data.suit} playable="true" />
+            <Card key={data.key} value={data.value} suit={data.suit} playable="true" />
         );
     }
 

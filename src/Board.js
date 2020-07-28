@@ -124,7 +124,7 @@ class Board extends React.Component {
       return (
         <div className="main-deck-area">
           <div className="card-pile">
-            <Card value="" suit="" playable="false" hidden="true" />
+            <Card key="deck" value="" suit="" playable="false" hidden="true" />
           </div>
           <div className="card-pile">
             {currentCard}
