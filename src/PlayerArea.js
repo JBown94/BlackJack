@@ -4,6 +4,15 @@ import Card from './Card';
 import './PlayerArea.scss';
 import './Cards.scss';
 
+export class PlayerAreaData {
+    constructor(playerNo, playerName, playerActive, playerCards) {
+        this.playerNo = playerNo;
+        this.playerName = playerName;
+        this.playerActive = playerActive;
+        this.playerCards = playerCards || [];
+    }
+}
+
 class PlayerArea extends React.Component {
     constructor(props) {
         super(props);
@@ -19,43 +28,30 @@ class PlayerArea extends React.Component {
         };
     }
 
-    renderCard(index, value, suit) {
-        return (
-            <Card key={index} value={value} suit={suit} playable="true" />
-        );
+    renderPlayerCards() {
+        const cards = this.state.playerCards;
+        let playerHand = [];
+
+        for (var i = 0; i < cards.length; i++) {
+            playerHand.push(this.renderCard(i, cards[i]));
+        }
+
+        return playerHand;
     }
-
-    generatePlayerCards() {
-        // const values = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
-        // const suits = ["S", "C", "H", "D"];
-
-        let playerCards = [];
-
-        //TODO: Properly implement the generation of cards
-        //  - The parent object needs to know what cards other players have, otherwise it's possible
-        //    to give out duplicates
-        //  - Preferably generate the entire list of 52 cards, then shuffle them & use the next
-        //    card in the array
-
-        // for (var i = 0; i < 7; i++) {
-        //     let cardValue = values[Math.floor(Math.random() * values.length)];
-        //     let cardSuit = suits[Math.floor(Math.random() * suits.length)];
-
-        //     playerCards.push(this.renderCard(i, cardValue, cardSuit));
-        // }
-
-        return playerCards;
+    renderCard(index, data) {
+        return (
+            <Card key={index} value={data.value} suit={data.suit} playable="true" />
+        );
     }
 
     render() {
         const text = TextResources();
-        // const playerCards = this.generatePlayerCards();
 
         return (
             <div id={this.state.id} className="player-container" data-active={this.state.playerActive}>
                 <div className="player-info">{this.state.playerName}</div>
                 <div className="cards-container">
-                    {this.state.playerCards}
+                    {this.renderPlayerCards()}
                 </div>
                 <div className="player-actions">
                     <button className="action-button">{text.PLAY}</button>

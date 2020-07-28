@@ -1,7 +1,7 @@
 import React from 'react';
-import PlayerArea from './PlayerArea';
+import PlayerArea, { PlayerAreaData } from './PlayerArea';
+import Card, { CardData } from './Card';
 import TextResources from './TextResources';
-import Card from './Card';
 
 class Board extends React.Component {
   constructor(props) {
@@ -28,7 +28,8 @@ class Board extends React.Component {
       let playerName = null;
       let playerCards = playerActive ? cardDeck.splice(0, 7) : [];
 
-      playerAreas.push(this.renderGamePlayer(i, playerActive, playerName, playerCards));
+      playerAreas.push(new PlayerAreaData(i, playerName, playerActive, playerCards));
+      //playerAreas.push(this.renderGamePlayer(i, playerActive, playerName, playerCards));
     }
 
     this.setState({
@@ -47,11 +48,12 @@ class Board extends React.Component {
 
     for(var s = 0; s < suits.length;s++) {
       for(var v = 0; v < values.length; v++) {
-        let suit = suits[s];
         let value = values[v];
-        let key = value + "_" + suit;
+        let suit = suits[s];
+        // let key = value + "_" + suit;
 
-        cardDeck.push(<Card key={key} value={value} suit={suit} hidden="false" playable="true" />);
+        cardDeck.push(new CardData(value, suit));
+        //cardDeck.push(<Card key={key} value={value} suit={suit} hidden="false" playable="true" />);
       }
     }
 
@@ -75,36 +77,6 @@ class Board extends React.Component {
     return cardDeck;
   }
 
-  renderGamePlayer(playerNo, isActive, customName, hand) {
-    return (
-      <PlayerArea
-        key={playerNo}
-        playerNo={playerNo}
-        playerActive={isActive}
-        customName={customName}
-        cards={hand} />
-    );
-  }
-  renderPlayArea() {
-    if (this.state.players.length > 0) {
-      const cards = this.state.cardsInPlay;
-      const currentCard = (cards.length > 0) ? cards[0]: null;
-
-      return (
-        <div className="main-deck-area">
-          <div className="card-pile">
-            <Card value="" suit="" playable="false" hidden="true" />
-            <div className="deck-pile">
-              {this.state.deck}
-            </div>
-          </div>
-          <div className="card-pile">
-            {currentCard}
-          </div>
-        </div>
-      );
-    }
-  }
   renderBoardActions() {
     let text = this.state.text;
     let boardActions = [];
@@ -121,12 +93,57 @@ class Board extends React.Component {
       </div>
     );
   }
+  renderGamePlayers() {
+    const players = this.state.players;
+    let playerAreas = [];
+
+    for(var i = 0; i < players.length; i++) {
+      const playerNo = i + 1;
+      const playerData = players[i];
+
+      playerAreas.push(
+        <PlayerArea key={playerNo} playerNo={playerNo} playerActive={playerData.playerActive}
+          customName={playerData.playerName}
+          cards={playerData.playerCards} />
+      );
+    }
+
+    return playerAreas;
+  }
+  renderPlayArea() {
+    if (this.state.players.length > 0) {
+      const cards = this.state.cardsInPlay;
+      const data = (cards.length > 0) ? cards[0]: null;
+
+      let currentCard = null;
+      
+      if (data !== null) {
+        currentCard = <Card
+                key={data.key} 
+                value={data.value}
+                suit={data.suit}
+                hidden="false"
+                playable="false" />
+      }
+
+      return (
+        <div className="main-deck-area">
+          <div className="card-pile">
+            <Card value="" suit="" playable="false" hidden="true" />
+          </div>
+          <div className="card-pile">
+            {currentCard}
+          </div>
+        </div>
+      );
+    }
+  }
   
   render() {
     return (
       <div className="board-container">
           {this.renderBoardActions()}
-          {this.state.players}
+          {this.renderGamePlayers()}
           {this.renderPlayArea()}
       </div>
     );

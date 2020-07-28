@@ -1,5 +1,13 @@
 import React from 'react';
 
+export class CardData {
+    constructor(value, suit) {
+        this.key = value + "_" + suit;
+        this.value = value;
+        this.suit = suit;
+    }
+}
+
 class Card extends React.Component {
     constructor(props) {
         super(props);
@@ -37,14 +45,15 @@ class Card extends React.Component {
         console.log("Drag End");
         console.log(this);
 
-        //TODO: Check if the drop target is the playing area (or it's container), then
-        //      Remove it from the player area & add it to the start of the cardsInPlay
+        //TODO: Check the drop target of the dragged card then, if dropped;
+        //  - In the play area, remove it from the player area & add it to the start of the cardsInPlay
+        //  - In the players card area, reorder the cards list
 
-        this.setState({
-            hidden: true,
-            selected: false,
-            draggable: false
-        });
+        // this.setState({
+        //     hidden: true,
+        //     selected: false,
+        //     draggable: false
+        // });
     }
 
     render() {
