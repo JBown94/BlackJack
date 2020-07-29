@@ -53,7 +53,7 @@
         grid-template-columns: repeat(12, 1fr);
         border: solid 1px #06471c;
         background: #12923d;
-        margin: 10px; 
+        margin: 5px; 
 
         &[data-active='false'] {
             opacity: 0.25;
@@ -177,6 +177,10 @@
         .is-turn-indicator {
             background: linear-gradient(-15deg, #3c3c3c, #7c7c7c7c, #5c5c5c);
         }
+
+        button {
+            background: grey;
+        }
     }
 
     .main-deck-area {
@@ -196,6 +200,10 @@
             text-align: center;
             border: solid 1px #06471c;
             background: #076325;
+
+            .card {
+                max-width: 100%;
+            }
 
             &.deck-pile {
                 overflow: hidden;
