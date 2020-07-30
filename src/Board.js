@@ -71,9 +71,14 @@ class Board extends React.Component {
           const lastCard = this.state.cardInPlay;
 
           if (dragState === Board.DRAG_STATES.ValidDrop) {
-            if (lastCard.value === playedCard.props.value || lastCard.suit === playedCard.props.suit) {
-              //console.log("Card Valid: Play Card");
+            if (lastCard.value === playedCard.value || lastCard.suit === playedCard.suit) {
+              let players = this.state.players;
+              let deck = this.state.deck;
+              
+              deck.push(lastCard);
 
+              this.playSelectedCard(players, playedCard);
+              this.toNextPlayer(players, deck, false);
               //TODO: Execute the players turn by;
               //  - Moving the card from the current player deck, to the card in play
               //  - Moving the previous in play card to the end of the deck array
@@ -82,7 +87,7 @@ class Board extends React.Component {
               //  - Move the previous in play card to the end of the deck array
               //  - Move the rest of the selection list to the end of the deck array
             } else {
-              // alert("Error: Invalid Selection");
+              alert("Error: Invalid Selection");
             }
           }
 
@@ -191,6 +196,22 @@ class Board extends React.Component {
     }
   }
 
+  playSelectedCard(players, playedCard) {
+    let playerId = this.state.activePlayer - 1;
+    let currentHand = players[playerId].playerCards;
+
+    let cardIndex = currentHand.map(card => card.key).indexOf(playedCard.key);
+
+    if (cardIndex !== -1) {
+      currentHand.splice(cardIndex, 1);
+    }
+
+    players[playerId].playerCards = currentHand;
+
+    this.setState({
+      cardInPlay: playedCard
+    });
+  }
   toNextPlayer(players, deck, forfeitFulfilled) {
     let lastPlayer = this.state.activePlayer;
     let nextPlayer = lastPlayer;

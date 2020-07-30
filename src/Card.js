@@ -31,14 +31,18 @@ class Card extends React.Component {
         };
     }
 
+    rawData() {
+        return new CardData(this.props.value, this.props.suit);
+    }
+
     render() {
       return (
         <div className="card" data-value={this.props.value} data-suit={this.props.suit}
             data-selected={this.state.selected} data-hidden={this.props.hidden}
             draggable={this.state.draggable}
             
-            onDragStart={e => this.props.handleDrag("START", this, e)}
-            onDragEnd={e => this.props.handleDrag("END", this, e)}
+            onDragStart={e => this.props.handleDrag("START", this.rawData(), e)}
+            onDragEnd={e => this.props.handleDrag("END", this.rawData(), e)}
             onClick={e => this.props.toggleCardSelection(this, e)}>
             
             <div className="card-val">{this.props.value}</div>
