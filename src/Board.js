@@ -57,6 +57,39 @@ class Board extends React.Component {
       default: console.log("Action Not Found");
     }
   }
+  handleDrag(dragAction, card, data) {
+    console.group("Handle Drag: '" + dragAction + "'");
+    console.log(card);
+    console.log(data);
+    console.groupEnd();
+
+    switch (dragAction) {
+      case "START": {
+        break;
+       }
+      case "END": {
+        break;
+      }
+      default: console.log("Drag Action Not Found");
+    }
+
+  }
+
+  toggleCardSelection(card, evt) {
+    console.log("Toggle Card Select");
+    console.log(card);
+    console.log(evt);
+
+    // let state = this.state;
+
+    // if (JSON.parse(state.draggable)) {
+    //     state.selected = !state.selected;
+
+    //     this.setState(state);
+    // }
+
+    // this.props.toggleCardSelection(this);
+  }
 
   onPlayerTurnGo() {
     console.log("Play Selected Cards");
@@ -216,7 +249,10 @@ class Board extends React.Component {
       playerAreas.push(
         <PlayerArea key={playerNo} playerNo={playerNo} playerActive={playerData.playerActive}
           customName={playerData.playerName} isCurrentTurn={playerData.isCurrentTurn}
-          cards={playerData.playerCards} onClick={e => this.handleClick(e)} />
+          cards={playerData.playerCards}
+          toggleCardSelection={(card, e) => this.toggleCardSelection(card, e)}
+          handleDrag={(dragAction, card, e) => this.handleDrag(dragAction, card, e)}
+          onClick={e => this.handleClick(e)} />
       );
     }
 

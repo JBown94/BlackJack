@@ -40,8 +40,11 @@ class PlayerArea extends React.Component {
     renderCard(data) {
         return (
             <Card key={data.key} value={data.value} suit={data.suit} 
-                playable="true" 
-                hidden={!this.props.isCurrentTurn} />
+                playable="true" hidden={!this.props.isCurrentTurn}
+                toggleCardSelection={(card, e) => this.props.toggleCardSelection(card, e)}
+                handleDrag={(dragAction, card, e) => this.props.handleDrag(dragAction, card, e)}
+                onClick={(e, data) => this.props.onClick(e, data)}
+                onDrag={(e, data) => this.props.onDrag(e, data)}/>
         );
     }
 

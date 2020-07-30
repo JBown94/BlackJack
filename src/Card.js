@@ -31,44 +31,15 @@ class Card extends React.Component {
         };
     }
 
-    toggleSelection() {
-        let state = this.state;
-
-        if (JSON.parse(state.draggable)) {
-            state.selected = !state.selected;
-
-            this.setState(state);
-        }
-    }
-
-    dragStart(e) {
-        console.log("Drag Start");
-        console.log(this);
-    }
-    dragEnd(e) {
-        console.log("Drag End");
-        console.log(this);
-
-        //TODO: Check the drop target of the dragged card then, if dropped;
-        //  - In the play area, remove it from the player area & add it to the start of the cardsInPlay
-        //  - In the players card area, reorder the cards list
-
-        // this.setState({
-        //     hidden: true,
-        //     selected: false,
-        //     draggable: false
-        // });
-    }
-
     render() {
       return (
         <div className="card" data-value={this.props.value} data-suit={this.props.suit}
             data-selected={this.state.selected} data-hidden={this.props.hidden}
             draggable={this.state.draggable}
             
-            onDragStart={e => this.dragStart(e)}
-            onDragEnd={e => this.dragEnd(e)}
-            onClick={() => this.toggleSelection()}>
+            onDragStart={e => this.props.handleDrag("START", this, e)}
+            onDragEnd={e => this.props.handleDrag("END", this, e)}
+            onClick={e => this.props.toggleCardSelection(this, e)}>
             
             <div className="card-val">{this.props.value}</div>
             <div className="suit-img"></div>

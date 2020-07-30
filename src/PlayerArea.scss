@@ -1,6 +1,6 @@
 
 .board-container {
-    background: #336699;
+    background: linear-gradient(#336699, #4477AA, #5588BB, #336699);
     height: 100%;
     display: grid;
     grid-template-rows: repeat(12, 1fr);
@@ -49,7 +49,7 @@
         grid-template-rows: repeat(12, 1fr);
         grid-template-columns: repeat(12, 1fr);
         border: solid 1px #06471c;
-        background: #12923d;
+        background: linear-gradient(#12923d, #23A34E, #34B45F, #12923d);
         margin: 5px; 
 
         &[data-active='false'] {
@@ -58,7 +58,7 @@
         }
 
         .player-info {
-            background: #023a15;
+            background: linear-gradient(#023a15, #134B26, #245C37, #023a15);
             color: #efefef;
             padding: 0.25em 0.75em;
             font-size: 18px; 
