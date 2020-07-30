@@ -17,4 +17,5 @@ button.action-button {
 
 button.action-button:hover {
   background: linear-gradient(#ff7b00, #ff3c00);
+  color: #efefef;
 }

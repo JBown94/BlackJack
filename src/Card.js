@@ -6,6 +6,13 @@ export class CardData {
         this.value = value;
         this.suit = suit;
     }
+
+    isBlackSuit() {
+        return this.suit === "S" || this.suit === "C";
+    }
+    isRedSuit() {
+        return this.suit === "H" || this.suit === "D";
+    }
 }
 
 class Card extends React.Component {

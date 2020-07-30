@@ -16,6 +16,7 @@
 
         button {
             border: solid 2px #3c3c3c;
+            background: linear-gradient(orange, orangered);
             display: inline-block;
             border-radius: 15px;
             margin-bottom: 1px;
@@ -36,12 +37,8 @@
             }
 
             &:hover {
-                box-shadow: 0 0 2px 1px black;
-                background: #3c3c3c;
+                background: linear-gradient(#ff7b00, #ff3c00);
                 color: #efefef;
-            }
-            &:active {
-                background: #bfbfbf;
             }
         }
 

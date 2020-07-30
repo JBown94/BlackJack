@@ -10,7 +10,9 @@ class Board extends React.Component {
     super(props);
 
     this.state = {
-      gameStarted: false,
+      gameStarted: false,       //
+      initialGo: true,          //TODO: Maybe place these flags in a their own object
+      forfeitFulfilled: false,  //  - To separate it out a bit & not just have a big long list of props
       players: [],
       deck: [],
       cardInPlay: null,
@@ -60,7 +62,8 @@ class Board extends React.Component {
     console.log("Play Selected Cards");
     console.log(this.state);
 
-    this.toNextPlayer();
+    const players = this.state.players;
+    const deck = this.state.deck;
     
     //TODO: Get a list of the selected cards for the current player, then;
     //  - Check if the selected cards are valid, if true, then;
@@ -68,23 +71,65 @@ class Board extends React.Component {
     //    - Move the other cards (if applicable) to the end of the 'deck' array
     //    - Move onto the next players go
     //  - If not, then notify user to select different cards
+
+    this.toNextPlayer(players, deck, false);
   }
   onPlayerTurnPass() {
-    console.log("Pass Go / Pick Up Cards");
-    console.log(this.state);
+    const players = this.state.players;
+    const deck = this.state.deck;
+    
+    const playerId = this.state.activePlayer - 1;
+    const lastCard = this.state.cardInPlay;
 
-    this.toNextPlayer();
+    if (deck.length > 0) {
+      let playerHand = players[playerId].playerCards;
+      let newPlayerHand = [];
+      let pickupCount = 1;
 
-    //TODO: Check the 'cardInPlay' for either a 2 or a BlackJack (or a stack of them)
-    //  - To determine the stack (if any), check the 'deck' array, starting from the end of the array
-    //  - If no 2's or BlackJack's, then the pickup value is 1
-    //  - Once the pickup value is determined;
-    //    - Move that number of cards from the top of the deck to that players hand
-    //  - Move onto the next players go
+      if (!this.state.forfeitFulfilled) {
+        if (lastCard.value === "2") {
+          pickupCount = 2;
+        } else if (lastCard.value === "J" && lastCard.isBlackSuit()) {
+          pickupCount = 7;
+        }
+
+        if (pickupCount !== 1 && !this.state.initialGo) {
+          let pickupMultiplier = 1;
+
+          for (var d = deck.length - 1; d >= 0; d--) {
+            let correctValue = deck[d].value === lastCard.value;
+            let correctSuit = true;
+            
+            if (pickupCount === 7) {
+              correctSuit = deck[d].isBlackSuit();
+            }
+
+            if (correctValue && correctSuit) {
+              pickupMultiplier++;
+            } else {
+              break;
+            }
+          }
+
+          pickupCount *= pickupMultiplier;
+        }
+      }
+
+      newPlayerHand = deck.splice(0, pickupCount);
+
+      for (var i = 0; i < newPlayerHand.length; i++) {
+        playerHand.push(newPlayerHand[i]);
+      }
+
+      players[playerId].playerCards = playerHand;
+
+      this.toNextPlayer(players, deck, true);
+    } else {
+      alert("Deck Empty: No Cards Available");
+    }
   }
 
-  toNextPlayer() {
-    let players = this.state.players;
+  toNextPlayer(players, deck, forfeitFulfilled) {
     let lastPlayer = this.state.activePlayer;
     let nextPlayer = lastPlayer;
 
@@ -101,8 +146,11 @@ class Board extends React.Component {
     players[nextPlayer - 1].isCurrentTurn = true;
 
     this.setState({
+      initialGo: false,
+      forfeitFulfilled: forfeitFulfilled,
       players: players,
-      activePlayer: nextPlayer
+      activePlayer: nextPlayer,
+      deck: deck
     });
   }
 
@@ -179,10 +227,16 @@ class Board extends React.Component {
       const data = this.state.cardInPlay;
       const card = <Card key={data.key} value={data.value} suit={data.suit} hidden="false" playable="false" />;
 
+      let deckCard = null;
+
+      if (this.state.deck.length > 0) {
+        deckCard = <Card key="deck" value="" suit="" playable="false" hidden="true" />
+      }
+
       return (
         <div className="main-deck-area">
           <div className="card-pile">
-            <Card key="deck" value="" suit="" playable="false" hidden="true" />
+            {deckCard}
           </div>
           <div className="card-pile">
             {card}
