@@ -5,6 +5,8 @@ import TextResources from './TextResources';
 
 class Board extends React.Component {
   static MAX_PLAYERS = 4;
+  static DRAG_STATE_KEY = "DRAG_STATE";
+  static DRAG_STATES = Object.freeze({ Started: 0, ValidDrop: 1 });
 
   constructor(props) {
     super(props);
@@ -54,25 +56,52 @@ class Board extends React.Component {
     switch(actionName) {
       case "PLAY": this.onPlayerTurnGo(); break;
       case "PASS": this.onPlayerTurnPass(); break;
-      default: console.log("Action Not Found");
+      default: alert("ERROR: Action Not Found");
     }
   }
-  handleDrag(dragAction, card, data) {
-    console.group("Handle Drag: '" + dragAction + "'");
-    console.log(card);
-    console.log(data);
-    console.groupEnd();
+  handleDrag(dragAction, playedCard) {
+    if (playedCard !== null) {
+      switch (dragAction) {
+        case "START": {
+          localStorage.setItem(Board.DRAG_STATE_KEY, Board.DRAG_STATES.Started);
+          break;
+        }
+        case "END": {
+          const dragState = parseInt(localStorage.getItem(Board.DRAG_STATE_KEY));
+          const lastCard = this.state.cardInPlay;
 
-    switch (dragAction) {
-      case "START": {
-        break;
-       }
-      case "END": {
-        break;
+          if (dragState === Board.DRAG_STATES.ValidDrop) {
+            if (lastCard.value === playedCard.props.value || lastCard.suit === playedCard.props.suit) {
+              //console.log("Card Valid: Play Card");
+
+              //TODO: Execute the players turn by;
+              //  - Moving the card from the current player deck, to the card in play
+              //  - Moving the previous in play card to the end of the deck array
+              //NOTE: Eventually will pass over an array of cards (even if an array of one), to then;
+              //  - Move the last card in selection list to the card in play
+              //  - Move the previous in play card to the end of the deck array
+              //  - Move the rest of the selection list to the end of the deck array
+            } else {
+              // alert("Error: Invalid Selection");
+            }
+          }
+
+          break;
+        }
+        default: alert("Error: Drag Action Not Found");
       }
-      default: console.log("Drag Action Not Found");
     }
+  }
 
+  onCardDragOver(evt) {
+    evt.preventDefault();
+
+    if (evt.dataTransfer && evt.dataTransfer.dropEffect) {
+      evt.dataTransfer.dropEffect = "move";
+    }
+  }
+  onCardDrop() {
+    localStorage.setItem(Board.DRAG_STATE_KEY, Board.DRAG_STATES.ValidDrop); 
   }
 
   toggleCardSelection(card, evt) {
@@ -274,7 +303,9 @@ class Board extends React.Component {
           <div className="card-pile">
             {deckCard}
           </div>
-          <div className="card-pile">
+          <div className="card-pile"
+            onDragOver={this.onCardDragOver}
+            onDrop={this.onCardDrop}>
             {card}
           </div>
         </div>
