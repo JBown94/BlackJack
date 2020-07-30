@@ -13,8 +13,10 @@ class Board extends React.Component {
 
     this.state = {
       gameStarted: false,       //
+      gameWon: false,           //
       initialGo: true,          //TODO: Maybe place these flags in a their own object
       forfeitFulfilled: false,  //  - To separate it out a bit & not just have a big long list of props
+
       players: [],
       deck: [],
       cardInPlay: null,
@@ -42,6 +44,7 @@ class Board extends React.Component {
 
     this.setState({
       gameStarted: true,
+      gameWon: false,
       players: playerAreas,
       deck: cardDeck,
       cardInPlay: initialCard,
@@ -79,10 +82,8 @@ class Board extends React.Component {
 
               this.playSelectedCard(players, playedCard);
               this.toNextPlayer(players, deck, false);
-              //TODO: Execute the players turn by;
-              //  - Moving the card from the current player deck, to the card in play
-              //  - Moving the previous in play card to the end of the deck array
-              //NOTE: Eventually will pass over an array of cards (even if an array of one), to then;
+
+              //TODO: Will need to pass over an array of cards (even if an array of one), to;
               //  - Move the last card in selection list to the card in play
               //  - Move the previous in play card to the end of the deck array
               //  - Move the rest of the selection list to the end of the deck array
@@ -201,6 +202,7 @@ class Board extends React.Component {
     let currentHand = players[playerId].playerCards;
 
     let cardIndex = currentHand.map(card => card.key).indexOf(playedCard.key);
+    let gameWon = false;
 
     if (cardIndex !== -1) {
       currentHand.splice(cardIndex, 1);
@@ -208,7 +210,13 @@ class Board extends React.Component {
 
     players[playerId].playerCards = currentHand;
 
+    if (currentHand.length === 0) {
+      gameWon = true;
+    }
+
     this.setState({
+      gameWon: gameWon,
+      gameStarted: !gameWon,
       cardInPlay: playedCard
     });
   }
@@ -274,6 +282,18 @@ class Board extends React.Component {
     let boardActions = [];
 
     if (!this.state.gameStarted) {
+      if(this.state.gameWon) {
+        const playerId = this.state.activePlayer - 1;
+        const player = this.state.players[playerId];
+        const playerName = (player) ? player.getPlayerName() : "PLAYER_NAME";
+
+        boardActions.push(
+          <div key="winner" className="winner-title">
+            <span className="prefix">{text.WINNER}</span>
+            <span className="player-name">{playerName}</span>
+          </div>
+        );
+      }
       boardActions.push(
         <button key="start" className="start-game" onClick={() => this.startGame()}>{text.START_GAME}</button>
       );
@@ -292,24 +312,26 @@ class Board extends React.Component {
     const players = this.state.players;
     let playerAreas = [];
 
-    for(var i = 0; i < players.length; i++) {
-      const playerNo = i + 1;
-      const playerData = players[i];
+    if(!this.state.gameWon) {
+      for(var i = 0; i < players.length; i++) {
+        const playerNo = i + 1;
+        const playerData = players[i];
 
-      playerAreas.push(
-        <PlayerArea key={playerNo} playerNo={playerNo} playerActive={playerData.playerActive}
-          customName={playerData.playerName} isCurrentTurn={playerData.isCurrentTurn}
-          cards={playerData.playerCards}
-          toggleCardSelection={(card, e) => this.toggleCardSelection(card, e)}
-          handleDrag={(dragAction, card, e) => this.handleDrag(dragAction, card, e)}
-          onClick={e => this.handleClick(e)} />
-      );
+        playerAreas.push(
+          <PlayerArea key={playerNo} playerNo={playerNo} playerActive={playerData.playerActive}
+            customName={playerData.playerName} isCurrentTurn={playerData.isCurrentTurn}
+            cards={playerData.playerCards}
+            toggleCardSelection={(card, e) => this.toggleCardSelection(card, e)}
+            handleDrag={(dragAction, card, e) => this.handleDrag(dragAction, card, e)}
+            onClick={e => this.handleClick(e)} />
+        );
+      }
     }
 
     return playerAreas;
   }
   renderPlayArea() {
-    if (this.state.players.length > 0) {
+    if (!this.state.gameWon && this.state.players.length > 0) {
       const data = this.state.cardInPlay;
       const card = <Card key={data.key} value={data.value} suit={data.suit} hidden="false" playable="false" />;
 

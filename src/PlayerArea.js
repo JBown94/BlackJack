@@ -5,6 +5,16 @@ import './PlayerArea.scss';
 import './Cards.scss';
 
 export class PlayerAreaData {
+    getPlayerName() {
+        const text = TextResources();
+
+        if (this.playerName !== null) {
+            return this.playerName;
+        }
+
+        return text.PLAYER + this.playerNo;
+    }
+
     constructor(playerNo, playerName, playerActive, playerCards, isCurrentTurn) {
         this.playerNo = playerNo;
         this.playerName = playerName;

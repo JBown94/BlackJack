@@ -14,6 +14,23 @@
         grid-column: 1 / span 12;
         grid-row: 1 / span 12;
 
+        .winner-title {
+            grid-column: 3 / span 8;
+            grid-row: 3 / span 1;
+
+            border: solid 2px orange;
+            border-radius: 8px;
+            background: #4c4c4c;
+            color: #efefef;
+            text-align: center;
+            font-size: 56px;
+            padding: 0.25em;
+
+            .prefix {
+                font-weight: bold;
+            }
+        }
+
         button {
             border: solid 2px #3c3c3c;
             background: linear-gradient(orange, orangered);
