@@ -38,7 +38,7 @@ function TextResources() {
 
   //TODO: Find out why the response is always the Index.html page
   Api.getResourceFromUrl(textStoreUrl).then(response => {
-    console.log(response);
+    // console.log(response);
   });
 
   // api.getResourceFromUrl("./Resources/Text.xml").then(response =>{ 

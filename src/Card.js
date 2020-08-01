@@ -31,6 +31,23 @@ class Card extends React.Component {
         };
     }
 
+    cardDragStart(e) {
+        if (this.props.handleDrag) {
+            this.props.handleDrag("START", this.rawData(), e);
+        }
+    }
+    cardDragEnd(e) {
+        if (this.props.handleDrag) {
+            this.props.handleDrag("END", this.rawData(), e);
+        }
+    }
+    
+    toggleCardSelection(e) {
+        if (this.props.toggleCardSelection) {
+            this.props.toggleCardSelection(this, e);
+        }
+    }
+
     rawData() {
         return new CardData(this.props.value, this.props.suit);
     }
@@ -41,9 +58,9 @@ class Card extends React.Component {
             data-selected={this.state.selected} data-hidden={this.props.hidden}
             draggable={this.state.draggable}
             
-            onDragStart={e => this.props.handleDrag("START", this.rawData(), e)}
-            onDragEnd={e => this.props.handleDrag("END", this.rawData(), e)}
-            onClick={e => this.props.toggleCardSelection(this, e)}>
+            onDragStart={e => this.cardDragStart(e)}
+            onDragEnd={e => this.cardDragEnd(e)}
+            onClick={e => this.toggleCardSelection(e)}>
             
             <div className="card-val">{this.props.value}</div>
             <div className="suit-img"></div>

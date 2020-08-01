@@ -38,8 +38,33 @@ class PlayerArea extends React.Component {
         };
     }
 
+    getActualCardValue = cardValue => {
+        const valueMap = { 
+            "A": 1, "2": 2, "3": 3, "4": 4, "5": 5, "6": 6, "7": 7,
+            "8": 8, "9": 9, "10": 10, "J": 11, "Q": 12, "K": 13
+        }
+
+        return valueMap[cardValue];
+    }
+    sortCardsList(cards) {
+        return cards = cards.sort((cardOne, cardTwo) => {
+            const firstValue = this.getActualCardValue(cardOne.value);
+            const secondValue = this.getActualCardValue(cardTwo.value);
+
+            //Initially sort by the card value
+            if (firstValue < secondValue) return -1;
+            if (firstValue > secondValue) return 1;
+
+            //If the cards are the same value, then sort by suit
+            if (cardOne.suit > cardTwo.suit) return 1;
+            if (cardOne.suit < cardTwo.suit) return -1;
+
+            return 0;
+        });
+    }
+
     renderPlayerCards() {
-        const cards = this.props.cards;
+        let cards = this.sortCardsList(this.props.cards);
         let playerHand = [];
 
         for (var i = 0; i < cards.length; i++) {
