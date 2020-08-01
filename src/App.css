@@ -19,3 +19,17 @@ button.action-button:hover {
   background: linear-gradient(#ff7b00, #ff3c00);
   color: #efefef;
 }
+
+@keyframes test {
+  0% {
+    background: linear-gradient(#336699, #4477AA, #5588BB, #336699);
+  }
+
+  50% {
+    background: linear-gradient(#FF0000, #EE1111, #EE2222, #FF0000);
+  }
+
+  100% {
+    background: linear-gradient(#336699, #4477AA, #5588BB, #336699);
+  }
+}

@@ -14,6 +14,12 @@
         grid-column: 1 / span 12;
         grid-row: 1 / span 12;
 
+        &[data-winner='true'] {
+            animation-name: test;// TODO: Add a more suitable animation for the background
+            animation-duration: 1s;
+            animation-iteration-count: infinite
+        }
+
         .winner-title {
             grid-column: 3 / span 8;
             grid-row: 3 / span 1;

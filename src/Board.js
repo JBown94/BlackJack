@@ -278,11 +278,13 @@ class Board extends React.Component {
   }
 
   renderBoardActions() {
-    let text = this.state.text;
+    const text = this.state.text;
+    const hasWinner = this.state.gameWon;
+
     let boardActions = [];
 
     if (!this.state.gameStarted) {
-      if(this.state.gameWon) {
+      if(hasWinner) {
         const playerId = this.state.activePlayer - 1;
         const player = this.state.players[playerId];
         const playerName = (player) ? player.getPlayerName() : "PLAYER_NAME";
@@ -303,7 +305,7 @@ class Board extends React.Component {
     }
 
     return (
-      <div className="board-actions">
+      <div className="board-actions" data-winner={hasWinner}>
           {boardActions}
       </div>
     );
