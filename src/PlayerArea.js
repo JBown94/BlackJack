@@ -7,12 +7,13 @@ import './Cards.scss';
 export class PlayerAreaData {
     getPlayerName() {
         const text = TextResources();
+        const playerId = this.playerNo - 1;
 
         if (this.playerName !== null) {
             return this.playerName;
         }
 
-        return text.PLAYER + this.playerNo;
+        return text.PLAYER + playerId;
     }
 
     constructor(playerNo, playerName, playerActive, playerCards, isCurrentTurn) {

@@ -1,3 +1,5 @@
+import Api from "./Api";
+
 const languagesCodes = {
     en: "English", fr: "French", es: "Spanish"
 };
@@ -30,10 +32,47 @@ const Text = {
 };
 
 function TextResources() {
-    const languageCode = (navigator.language || "").slice(0, 2);
-    const language = languagesCodes[languageCode] || "English";
+  const languageCode = (navigator.language || "").slice(0, 2);
+  const language = languagesCodes[languageCode] || "English";
+  const textStoreUrl = "./Resources/Text.xml";
 
-    return Text[language] || {};
-  }
+  //TODO: Find out why the response is always the Index.html page
+  Api.getResourceFromUrl(textStoreUrl).then(response => {
+    console.log(response);
+  });
+
+  // api.getResourceFromUrl("./Resources/Text.xml").then(response =>{ 
+  //   console.log(response);
+  // }, (status, request) => {
+  //   console.log("Get Failed: " + status);
+  //   console.log(request);
+  // });
+
+  // $.ajax({
+  //     url: textStoreUrl,
+  //     dataType: ($.browser.msie) ? "text" : "xml",
+  //     success: data => {
+  //       var xml;
+  //       if (typeof data == "string") {
+  //         xml = new ActiveXObject("Microsoft.XMLDOM");
+  //         xml.async = false;
+  //         xml.loadXML(data);
+  //       } else {
+  //         xml = data;
+  //       }
+  //     }
+  //   }); 
+
+  // fetch(textStoreUrl).then(response => {
+  //     response.text().then(data => {
+  //         parseString(data, function(err, result){
+  //             console.log(result);
+  //             console.log(err);
+  //         });
+  //     });
+  // });
+
+  return Text[language] || {};
+}
   
 export default TextResources;

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<TextStore>
+    <English>
+        <Text Key="PLAYER" Text="Player" />
+        <Text Key="PLAY" Text="Play Selected" />
+        <Text Key="PASS" Text="Pass / Pick Up" />
+        <Text Key="DECK_PILE" Text="Deck Pile" />
+        <Text Key="PLAYING_PILE" Text="Playing Pile" />
+        <Text Key="START_GAME" Text="Start New Game" />
+        <Text Key="SHOW_RULES" Text="Show Rules" />
+        <Text Key="DEAL_CARDS" Text="Deal Cards" />
+        <Text Key="WINNER" Text="Winner: " />
+    </English>
+    <French>
+        <Text Key="PLAYER" Text="LePlayer" />
+        <Text Key="PLAY" Text="Le Play Selected" />
+        <Text Key="PASS" Text="Le Pass or Le Pick Up" />
+        <Text Key="DECK_PILE" Text="Le Deck Pile" />
+        <Text Key="PLAYING_PILE" Text="Le Playing Pile" />
+        <Text Key="START_GAME" Text="le Start a Game" />
+        <Text Key="SHOW_RULES" Text="Le Show un Rules" />
+        <Text Key="DEAL_CARDS" Text="Le Deal un Cards" />
+        <Text Key="WINNER" Text="Le Winner: " />
+    </French>
+</TextStore>
